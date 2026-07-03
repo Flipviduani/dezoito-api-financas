@@ -1,0 +1,21 @@
+spring:
+
+  application:
+    name: dezoito-api-financas
+
+  datasource:
+    url: jdbc:postgresql://localhost:5435/bd-api-financas
+    username: vidu
+    password: vidu
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+server:
+  port: 8083

@@ -1,0 +1,55 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: api-financas-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: bd-api-financas
+      POSTGRES_USER: vidu
+      POSTGRES_PASSWORD: vidu
+    ports:
+      - "5435:5432"
+    volumes:
+      - dezoito-api-financas-postgres-data:/var/lib/postgresql/data
+    networks:
+      - dezoito-api-financas-network
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: api-financas-pgadmin
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: vidu@email.com
+      PGADMIN_DEFAULT_PASSWORD: Vidu@2026
+    ports:
+      - "5056:80"
+    volumes:
+      - dezoito-api-financas-pgadmin-data:/var/lib/pgadmin
+    depends_on:
+      - postgres
+    networks:
+      - dezoito-api-financas-network
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: api-financas-rabbitmq
+    restart: unless-stopped
+    environment:
+      RABBITMQ_DEFAULT_USER: vidu
+      RABBITMQ_DEFAULT_PASS: vidu
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - dezoito-api-financas-rabbitmq-data:/var/lib/rabbitmq
+    networks:
+      - dezoito-api-financas-network
+
+volumes:
+  dezoito-api-financas-postgres-data:
+  dezoito-api-financas-pgadmin-data:
+  dezoito-api-financas-rabbitmq-data:
+
+networks:
+  dezoito-api-financas-network:
+    driver: bridge
