@@ -77,6 +77,17 @@ public class CategoriaService {
                 .toList();
     }
 
+    public CategoriaResponse obterPorId(UUID id) {
+
+        //Buscar a categoria no banco de dados através do ID
+        var categoria = categoriaRepository.findById(id)
+                .orElseThrow(() -> new RegistroNaoEncontradoException("Categoria não encontrada."));
+
+        //Retornar os dados
+        return toResponse(categoria);
+
+    }
+
     private void validarCategoria(Categoria categoria) {
         if (categoria.getNome() == null || categoria.getNome().trim().isEmpty()) {
             throw new ValidacaoException("O nome da categoria é obrigatório.");

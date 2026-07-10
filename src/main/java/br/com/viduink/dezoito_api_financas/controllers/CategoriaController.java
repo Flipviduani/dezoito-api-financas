@@ -74,4 +74,16 @@ public class CategoriaController {
             return ResponseEntity.status(200).body(response);
             //desenvolvimento dos serviços e api de categoria
     }
+
+    @GetMapping("obter/{id}")
+    public ResponseEntity<?> obterPorId(@PathVariable UUID id) {
+        try{
+            var response = categoriaService.obterPorId(id);
+            return ResponseEntity.status(200).body(response);
+
+        } catch(RegistroNaoEncontradoException e) {
+            //HTTP 404 (NOT FOUND)
+            return ResponseEntity.status(404).body(e.getMessage());
+        }
+    }
 }
