@@ -29,4 +29,17 @@ public interface MovimentacaoRepository extends JpaRepository<Movimentacao, UUID
             @Param("pDataFim") LocalDate dataFim,
             Pageable paginacao
     );
+
+    //Consulta para retornar as movimentações dentro de um período de datas selecionado
+
+    @Query("""
+            SELECT m
+            FROM Movimentacao m
+            WHERE m.data BETWEEN :pDataInicio AND :pDataFim
+            ORDER BY m.data DESC
+            """)
+    List<Movimentacao> findByData(
+            @Param("pDataInicio") LocalDate dataInicio,
+            @Param("pDataFim") LocalDate dataFim
+    );
 }

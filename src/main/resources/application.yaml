@@ -17,5 +17,12 @@ spring:
       hibernate:
         format_sql: true
 
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: vidu
+    password: vidu
+    virtual-host: /
+
 server:
   port: 8083
