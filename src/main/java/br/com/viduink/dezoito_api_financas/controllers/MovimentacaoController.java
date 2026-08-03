@@ -13,7 +13,7 @@ import java.util.UUID;
 
 
 @RestController
-@RequestMapping("/ap1/v1/movimentacoes")
+@RequestMapping("/api/v1/movimentacoes")
 public class MovimentacaoController {
 
     @Autowired
